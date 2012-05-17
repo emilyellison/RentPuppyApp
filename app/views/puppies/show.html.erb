@@ -2,6 +2,12 @@
 
 <p>Address: <%= @puppy.address %></p>
 
-<% @puppy.walks.each do |walk| %>
-	<%= link_to walk.walk_date, walk_url(walk.id) %><br/>
+<h3>Available Dates:</h3>
+<% @puppy.walks.sort_by{ |x| x.walk_date }.each do |walk| %>
+	<%= link_to walk.walk_date, walk_url(walk.id) %>
+	<% if walk.biddings.sort_by{ |x| -(x.value * x.quality) }.first.present? %>
+		- Current Winner: <%= walk.biddings.sort_by{ |x| -(x.value * x.quality) }.first.firstname %>
+	<% end %><br/>
 <% end %>
+<br/>
+Back to <%= link_to 'Puppies', puppies_url %>

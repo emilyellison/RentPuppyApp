@@ -1,6 +1,14 @@
 <h2>Puppies for Rent</h2>
 <hr/>
 <% @puppies.each do |puppy| %>
-	<%= link_to puppy.name, puppy_url(puppy.id) %> @ <%= puppy.address %>
-	<hr/>
+	<h3><%= link_to puppy.name, puppy_url(puppy.id) %></h3>
+
+	<h3>Available Dates:</h3>
+	<% puppy.walks.sort_by{ |x| x.walk_date }.each do |walk| %>
+		<%= link_to walk.walk_date, walk_url(walk.id) %>
+		<% if walk.biddings.sort_by{ |x| -(x.value * x.quality) }.first.present? %>
+			- Current Winner: <%= walk.biddings.sort_by{ |x| -(x.value * x.quality) }.first.firstname %>
+		<% end %><br/>
+	<% end %>
+	<br/><hr/>
 <% end %>

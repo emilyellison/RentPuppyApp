@@ -1,6 +1,7 @@
 <h2>Sign up for Rent a Puppy</h2>
 
 <%= form_for @user do |f| %>
+	<%= f.hidden_field :quality, :value => rand(30) + 70 %>
 	<%= f.label :firstname, 'First Name' %>
 	<%= f.text_field :firstname %>
 	<%= f.label :lastname, 'Last Name' %>
