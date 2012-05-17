@@ -1,0 +1,26 @@
+<% if @current_user %>
+	<h2>Submit Your Bid</h2>
+	<p>
+		Logged in as: 
+		<%= link_to @current_user.firstname, user_url(@current_user.id) %>
+	</p>
+	<p>
+		Puppy:
+		<%= link_to @walk_option.puppy.name, puppy_url(@walk_option.puppy.id) %>
+	</p>
+	<p>
+		Date:
+		<%= @walk_option.walk_date %>
+	</p>
+	<%= form_for @bidding do |f| %>
+		<%= f.hidden_field :firstname, :value => @current_user.firstname %>
+		<%= f.hidden_field :lastname, :value => @current_user.lastname %>
+		<%= f.hidden_field :quality, :value => @current_user.quality %>
+		<%= f.hidden_field :walk_id, :value => @walk_option.id %>
+		<%= f.label :value, 'What would you like to bid?' %>
+		<%= f.text_field :value %><br/>
+		<%= f.submit 'Submit Your Bid' %>
+	<% end %>
+<% else %>
+	<h2>You must be a member of Rent a Puppy to bid!</h2>
+<% end %>

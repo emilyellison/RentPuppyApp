@@ -1,0 +1,8 @@
+<h2>Members</h2>
+<hr/>
+<% @users.each do |user| %>
+	<%= link_to user.username, user_url(user.id) %><br/>
+	<%= user.firstname %> <%= user.lastname %><br/>
+	<%= user.quality %>
+	<hr/>
+<% end %>

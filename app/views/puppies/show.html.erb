@@ -1,0 +1,7 @@
+<h2><%= @puppy.name %></h2>
+
+<p>Address: <%= @puppy.address %></p>
+
+<% @puppy.walks.each do |walk| %>
+	<%= link_to walk.walk_date, walk_url(walk.id) %><br/>
+<% end %>

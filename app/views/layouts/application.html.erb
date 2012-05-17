@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rent a Puppy</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<h1><%= link_to 'Rent a Puppy', home_url %>
+		<span class='menu'>
+			<%= link_to 'Puppies', puppies_url %> |
+			<% if @current_user %>
+				<%= link_to 'Members', users_url %> | 
+				<%= link_to 'Sign Out', session_url %>
+			<% else %>
+				<%= link_to 'Sign In', new_session_url %>
+			<% end %>
+		</span>	
+	</h1>
+	<hr/><br/>	
+	<% if flash[:notice] %>
+		<p class='notice'><%= flash[:notice] %></p>
+	<% end %>
+<%= yield %>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<p>
+	Puppy:
+	<%= link_to @walk.puppy.name, puppy_url(@walk.puppy.id) %>
+</p>
+<p>
+	Walk Date:
+	<%= @walk.walk_date %>
+</p>
+<% if !@walk.biddings.empty? %>
+	<p>
+		Current Winner:
+		<%= @first.firstname %> wins a walk with <%= @walk.puppy.name %> for $<%= @price %>.
+	</p>
+	<p>
+		First Place:
+		<%= @first.firstname %> @ $<%= @first.value %><br/>
+		<% if @second.present? %>
+			Second Place:
+			<%= @second.firstname %> @ $<%= @second.value %>
+		<% end %>
+	</p>
+<% end %>
+<p>
+	Bid History:
+	<% @walk.biddings.each do |bidding| %>
+		<li>
+				<%= time_ago_in_words(bidding.created_at) %> ago - $<%= bidding.value %> 
+				<%= bidding.firstname %> 
+				<%= bidding.lastname %>
+				(<%= bidding.quality %>)
+		</li>
+	<% end %>
+</p>
+<br/>
+<% if @current_user %>
+	<p> 
+		<%= link_to "Submit your bid as #{@current_user.firstname}.", new_bidding_url %>
+	</p>
+<% else %>
+	<p>
+		Would you like to bid? <%= link_to 'Sign up!', new_user_url %>
+	</p>
+<% end %>

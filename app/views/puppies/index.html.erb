@@ -1,0 +1,6 @@
+<h2>Puppies for Rent</h2>
+<hr/>
+<% @puppies.each do |puppy| %>
+	<%= link_to puppy.name, puppy_url(puppy.id) %> @ <%= puppy.address %>
+	<hr/>
+<% end %>
